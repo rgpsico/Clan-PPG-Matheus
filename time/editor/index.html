@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<?php 
+
+
+
+if(isset($_POST['enviar'])){
+
+if(isset($_SESSION['user']))
+{
+$de =  $_SESSION['user'];
+
+}else
+{
+$de = 'Anonimo';
+
+
+}
+
+$nome      =  $_GET    ['perfil'];
+
+$mensagem  =  $_POST   ['mensagem'];
+$email     =  $_GET     ['email'];
+
+
+$insert = mysql_query("insert into mensagem (nome , mensagem, para , de) values ('$nome', '$mensagem','$email' , '$de')");
+if($insert){
+echo '<span class="">Sua mensagem foi enviada</span>';
+
+}else{
+echo'<span class="">Sua mensagem não foi enviada</span>';
+
+}
+}
+?>
+
+
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="time/editor/images/style.css">
+	<!-- markItUp! skin -->
+	<link rel="stylesheet" type="text/css" href="time/editor/markitup/skins/markitup/style.css">
+	<!--  markItUp! toolbar skin -->
+	<link rel="stylesheet" type="text/css" href="time/editor/markitup/sets/default/style.css">
+	<!-- jQuery -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<!-- markItUp! -->
+	<script type="text/javascript" src="time/editor/markitup/jquery.markitup.js"></script>
+	<!-- markItUp! toolbar settings -->
+	<script type="text/javascript" src="time/editor/markitup/sets/default/set.js"></script>
+</head>
+<body>
+
+<p> <a href="http://markitup.jaysalvat.com"></a>.</p>
+<form name="" method="post" style="" action="">
+<textarea id="markItUp" name="mensagem" cols="30" rows="0">
+
+
+</textarea>
+<input type ="submit" name="enviar">
+</form>
+
+<script type="text/javascript">
+$(function() {
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('#markItUp').markItUp(mySettings);
+
+
+
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );	
+	$('.add').click(function() {
+ 		$('#markItUp').markItUp('insert',
+			{ 	openWith:'<opening tag>',
+				closeWith:'<\/closing tag>',
+				placeHolder:"New content"
+			}
+		);
+ 		return false;
+	});
+	
+	// And you can add/remove markItUp! whenever you want
+	// $(textarea).markItUpRemove();
+	$('.toggle').click(function() {
+		if ($("#markItUp.markItUpEditor").length === 1) {
+ 			$("#markItUp").markItUp('remove');
+			$("span", this).text("get markItUp! back");
+		} else {
+			$('#markItUp').markItUp(mySettings);
+			$("span", this).text("!");
+		}
+ 		return false;
+	});
+});
+</script>
+
+
+
+<?php
+if(isset($_SESSION['user'])){
+
+
+if($_GET['perfil'] ==  $_SESSION['user'])
+
+{
+
+$nome = $_SESSION['user'];
+
+}
+elseif($_GET['perfil'] !=  $_SESSION['user'])
+{
+
+
+$nome = 'nada';
+
+
+}
+
+
+
+$query = mysql_query("select * from mensagem where nome='$nome' order by id desc");
+if(!$query){
+
+
+
+
+}else{
+$bus = mysql_fetch_array($query);
+echo $bus['mensagem'];
+echo '<br/>';
+echo $bus['de'];
+
+
+
+
+}
+}
+
+
+
+
+
+
+
+
+?>
+</body>
+</html>
