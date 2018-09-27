@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PPG entre pro nosso grupo</title>
+
+<link rel="stylesheet" type="text/css" href="styles.css" />
+
+</head>
+
+<body>
+<script>
+function IsNum(v)
+
+{
+   var ValidChars = "0123456789";
+   var IsNumber=true;
+   var Char;
+
+ 
+   for (i = 0; i < v.length && IsNumber == true; i++) 
+      { 
+      Char = v.charAt(i); 
+      if (ValidChars.indexOf(Char) == -1) 
+         {
+         IsNumber = false;
+         }
+      }
+   return IsNumber;
+   
+}
+
+function valida(form) {
+if (form.nome.value=="") {
+alert("Preencha o nome corretamente.","blue");
+form.nome.focus();
+return false;
+}
+var filtro_mail = /^.+@.+\..{2,3}$/
+if (!filtro_mail.test(form.email.value) || form.email.value=="") {
+alert("Preencha o e-mail corretamente.");
+form.email.focus();
+return false;
+}
+
+
+
+
+
+
+
+
+
+if (form.senha.value=="" || form.senha.value.length < 6) {
+alert("Preencha a senha corretamente.");
+form.senha.focus();
+return false;
+}
+
+if (form.conf_senha.value=="" || form.conf_senha.value.length < 6) {
+alert("Preencha a confirmação de senha corretamente.");
+form.conf_senha.focus();
+return false;
+}
+
+if (form.senha.value != form.sen.value) {
+alert("A senha e a confirmação tem de ser iguais.");
+form.sen.focus();
+return false;
+}
+
+
+}
+</script>
+
+<div id="carbonForm">
+
+
+	<h1>Cadastre-se</h1>
+
+    <form action="submit.php" method="post" id="" enctype="multypart/form-data" onsubmit="return valida(this);">
+
+    <div class="fieldContainer">
+
+        <div class="formRow">
+            <div class="label">
+                <label for="name">Nome:</label>
+            </div>
+            
+            <div class="field">
+                <input type="text" name="nome" id="name" />
+            </div>
+        </div>
+        
+        <div class="formRow">
+            <div class="label">
+                <label for="email">Email:</label>
+            </div>
+            
+            <div class="field">
+                <input type="text" name="email" id="email" />
+            </div>
+			
+        </div>
+		<div class="formRow">
+            <div class="label">
+                <label for="pass">Senha:</label>
+            </div>
+            
+            <div class="field">
+                <input type="password" name="senha" id="senha" />
+            </div>
+			
+        </div>
+        
+        <div class="formRow">
+            <div class="label">
+                <label for="sen">Confi-senha:</label>
+            </div>
+
+            <div class="field">
+                <input type="password" name="sen" id="sen" />
+            </div>
+           
+        </div>
+        
+        
+    </div> <!-- Closing fieldContainer -->
+    
+    <div class="signupButton">
+        <input type="submit" name="enviar" id="submit" value="enviar" />
+    </div>
+    
+    </form>
+      
+</div>
+
+<h2 id="footer"><a href="http://tutorialzine.com/2010/04/carbon-signup-form/"></a></h2>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>
